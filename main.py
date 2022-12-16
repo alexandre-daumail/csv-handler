@@ -3,16 +3,17 @@ import csv
 import json
 
 
-def make_json(file: str):
+def make_json(csv_file_path: str, json_file_path):
     """
         Convert a CSV to JSON
-        :param file: path string. Needs to be a csv
+        :param csv_file_path: path string. Needs to be a csv
+        :param json_file_path: path string.
         :return: sum of a and b
     """
     data = {}
 
     # Open a csv reader called DictReader
-    with open(file, encoding='utf-8') as csvf:
+    with open(csv_file_path, encoding='utf-8') as csvf:
         csvReader = csv.DictReader(csvf)
 
         # Convert each row into a dictionary
@@ -23,6 +24,8 @@ def make_json(file: str):
             data[link_id] = rows
 
     print(json.dumps(data, indent=4))
+    with open(json_file_path, 'w', encoding='utf-8') as jsonf:
+        jsonf.write(json.dumps(data, indent=4))
 
 
 if __name__ == "__main__":
